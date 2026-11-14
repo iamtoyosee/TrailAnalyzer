@@ -135,11 +135,12 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 .chain__node--action .chain__title { color: #fff; }
 .chain__node--action .chain__caption, .chain__node--action .chain__detail { color: #b8c1d6; }
 
-.chain--lg .chain__node { padding: 14px 20px; margin-right: 44px; border-width: 2px; border-radius: var(--r-md); }
-.chain--lg .chain__node:not(:last-child)::after { right: -45px; width: 44px; height: 2px; }
-.chain--lg .chain__node:not(:last-child)::before { right: -45px; }
+.chain--lg { flex-wrap: nowrap; }
+.chain--lg .chain__node { padding: 14px 18px; margin-right: 36px; border-width: 2px; border-radius: var(--r-md); }
+.chain--lg .chain__node:not(:last-child)::after { right: -37px; width: 36px; height: 2px; }
+.chain--lg .chain__node:not(:last-child)::before { right: -37px; }
 .chain--lg .chain__node:last-child { margin-right: 0; }
-.chain--lg .chain__title { font-size: 1.05rem; }
+.chain--lg .chain__title { font-size: 1rem; }
 .chain--lg .chain__caption { font-size: 0.8rem; }
 
 /* The one orchestrated moment: the hero chain links up left to right on load. */
@@ -152,12 +153,12 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 .mix__bar { display: flex; gap: 3px; height: 14px; border-radius: 999px; overflow: hidden; }
 .mix__seg { display: block; min-width: 6px; }
 .mix__legend { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 20px; }
-.mix__legend li { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 8px; }
+.mix__legend li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; column-gap: 8px; row-gap: 2px; }
 .mix__legend li.is-empty { opacity: 0.45; }
-.swatch { width: 10px; height: 10px; border-radius: 3px; align-self: center; }
-.mix__label { color: var(--ink-2); font-size: 0.9rem; }
-.mix__num { font-weight: 700; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
-.mix__pct { grid-column: 2 / 4; font-size: 0.8rem; color: var(--muted); }
+.swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: none; }
+.mix__num { font-weight: 700; font-size: 1.6rem; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.mix__pct { font-size: 0.85rem; color: var(--muted); }
+.mix__label { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); font-size: 0.88rem; }
 
 /* ---------- Tags ---------- */
 .actor-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; padding: 2px 9px 2px 7px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
@@ -245,6 +246,7 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 .table-wrap { overflow-x: auto; }
 .events { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .events th { text-align: left; font-weight: 600; font-size: 0.8rem; color: var(--muted); padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.events td .who { white-space: nowrap; }
 .events td { padding: 9px 14px; border-bottom: 1px solid var(--line-2); vertical-align: middle; }
 .events__row { cursor: pointer; }
 .events__row:hover, .events__row.is-open { background: var(--surface-2); }
@@ -270,6 +272,15 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 .conf--low .conf__fill { background: var(--high); }
 .conf--low { color: var(--high); }
 
+/* ---------- Narrow screens: chains stack vertically ---------- */
+@media (max-width: 960px) {
+  .chain { flex-direction: column; align-items: flex-start; }
+  .chain__node, .chain--lg .chain__node { margin: 0 0 22px; max-width: 100%; }
+  .chain__node:last-child, .chain--lg .chain__node:last-child { margin-bottom: 0; }
+  .chain__node:not(:last-child)::after, .chain--lg .chain__node:not(:last-child)::after { right: auto; left: 22px; top: 100%; width: 1.5px; height: 22px; }
+  .chain__node:not(:last-child)::before, .chain--lg .chain__node:not(:last-child)::before { right: auto; left: 18.5px; top: calc(100% + 16px); border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--line); border-bottom: 0; transform: none; }
+}
+
 /* ---------- Small screens ---------- */
 @media (max-width: 760px) {
   .topbar__inner { flex-wrap: wrap; gap: 8px 16px; padding: 10px 16px 0; }
@@ -278,12 +289,6 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
   .source__badge { display: none; }
   .main { padding: 24px 16px 40px; }
   .panel { padding: 20px; }
-  .chain__node { margin-right: 20px; margin-bottom: 8px; }
-  .chain__node:not(:last-child)::after { right: -21px; width: 20px; }
-  .chain__node:not(:last-child)::before { right: -21px; }
-  .chain--lg .chain__node { margin-right: 24px; }
-  .chain--lg .chain__node:not(:last-child)::after { right: -25px; width: 24px; }
-  .chain--lg .chain__node:not(:last-child)::before { right: -25px; }
   .calls li { grid-template-columns: 5.5rem 1fr; }
   .calls__res { grid-column: 2; }
   .detail { grid-template-columns: 1fr; }

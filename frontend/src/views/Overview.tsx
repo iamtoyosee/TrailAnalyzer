@@ -1,4 +1,4 @@
-import type { Report } from '../types'
+import type { Report, TrailEvent } from '../types'
 import type { ReportIndex } from '../lib/report'
 import { SEVERITY_ORDER, fmtDate, fmtTime } from '../lib/report'
 import { Chain, buildChain } from '../components/Chain'
@@ -28,10 +28,18 @@ export function Overview({ report, idx, go }: { report: Report; idx: ReportIndex
   const top = [...report.findings].sort(
     (a, b) => SEVERITY_ORDER.indexOf(a.severity) - SEVERITY_ORDER.indexOf(b.severity),
   )
-  // Hero example: the first agent-on-behalf write, else the first write, else the first event.
+  // Hero example: prefer a flagged change made by an agent for a person, since that is
+  // the case this tool exists for. Skip AssumeRole: it is plumbing, not the action.
+  const flagged = new Set(top.flatMap((f) => f.event_ids))
+  const bySeverity = top.flatMap((f) => f.event_ids)
+  const isAction = (e: TrailEvent) => !e.read_only && !e.event_name.startsWith('AssumeRole')
   const heroEvent =
-    report.events.find((e) => e.classification.actor_type === 'agent_on_behalf' && !e.read_only) ??
-    report.events.find((e) => !e.read_only) ??
+    bySeverity
+      .map((id) => idx.events.get(id))
+      .find((e) => e && e.classification.actor_type === 'agent_on_behalf' && isAction(e)) ??
+    report.events.find((e) => e.classification.actor_type === 'agent_on_behalf' && isAction(e) && flagged.has(e.event_id)) ??
+    report.events.find((e) => e.classification.actor_type.startsWith('agent') && isAction(e)) ??
+    report.events.find(isAction) ??
     report.events[0]
   const heroActor = heroEvent ? idx.actors.get(heroEvent.actor_id) : undefined
 

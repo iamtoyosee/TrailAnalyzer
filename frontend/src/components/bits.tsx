@@ -29,10 +29,12 @@ export function ActorMix({ report }: { report: Report }) {
       <ul className="mix__legend">
         {ACTOR_ORDER.map((t) => (
           <li key={t} className={counts[t] === 0 ? 'is-empty' : undefined}>
-            <span className={`swatch bg--${t}`} aria-hidden="true" />
-            <span className="mix__label">{ACTOR_META[t].label}</span>
             <span className="mix__num">{counts[t]}</span>
             <span className="mix__pct">{Math.round((counts[t] / total) * 100)}%</span>
+            <span className="mix__label">
+              <span className={`swatch bg--${t}`} aria-hidden="true" />
+              {ACTOR_META[t].label}
+            </span>
           </li>
         ))}
       </ul>
