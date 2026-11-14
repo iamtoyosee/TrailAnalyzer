@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/iamtoyosee/TrailAnalyzer/schema/report.schema.json",
+  "title": "TrailAnalyzer report",
+  "description": "What the TrailAnalyzer backend writes and the web UI reads. Version 0.1.",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "source", "actors", "events", "sessions", "findings"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source": {
+      "type": "object",
+      "required": ["kind", "time_range"],
+      "properties": {
+        "kind": { "enum": ["file", "s3", "lookup_events"] },
+        "account_id": { "type": "string", "pattern": "^[0-9]{12}$" },
+        "regions": { "type": "array", "items": { "type": "string" } },
+        "time_range": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "string", "format": "date-time" },
+            "end": { "type": "string", "format": "date-time" }
+          }
+        },
+        "description": { "type": "string" }
+      }
+    },
+    "actors": { "type": "array", "items": { "$ref": "#/$defs/actor" } },
+    "events": { "type": "array", "items": { "$ref": "#/$defs/event" } },
+    "sessions": { "type": "array", "items": { "$ref": "#/$defs/session" } },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } }
+  },
+  "$defs": {
+    "actorType": { "enum": ["human", "agent", "agent_on_behalf", "automation", "unknown"] },
+    "actor": {
+      "type": "object",
+      "required": ["id", "type", "display_name"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "$ref": "#/$defs/actorType" },
+        "display_name": { "type": "string" },
+        "principal_arn": { "type": "string" },
+        "on_behalf_of": { "type": "string", "description": "Actor id of the human, for agent_on_behalf" },
+        "agent_client": { "type": "string" }
+      }
+    },
+    "signal": {
+      "type": "object",
+      "required": ["name", "value", "points_to", "weight"],
+      "properties": {
+        "name": { "type": "string" },
+        "value": { "type": "string" },
+        "points_to": { "$ref": "#/$defs/actorType" },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": [
+        "event_id", "event_time", "event_source", "event_name", "aws_region",
+        "actor_id", "principal_arn", "read_only", "classification"
+      ],
+      "properties": {
+        "event_id": { "type": "string" },
+        "event_time": { "type": "string", "format": "date-time" },
+        "event_source": { "type": "string" },
+        "event_name": { "type": "string" },
+        "aws_region": { "type": "string" },
+        "actor_id": { "type": "string" },
+        "session_id": { "type": "string" },
+        "principal_arn": { "type": "string" },
+        "source_ip": { "type": "string" },
+        "user_agent": { "type": "string" },
+        "read_only": { "type": "boolean" },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["arn"],
+            "properties": { "arn": { "type": "string" }, "type": { "type": "string" } }
+          }
+        },
+        "error_code": { "type": "string" },
+        "classification": {
+          "type": "object",
+          "required": ["actor_type", "confidence", "signals"],
+          "properties": {
+            "actor_type": { "$ref": "#/$defs/actorType" },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "signals": { "type": "array", "items": { "$ref": "#/$defs/signal" } }
+          }
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": ["session_id", "actor_id", "start", "end", "event_ids"],
+      "properties": {
+        "session_id": { "type": "string" },
+        "title": { "type": "string" },
+        "actor_id": { "type": "string" },
+        "role_arn": { "type": "string" },
+        "start": { "type": "string", "format": "date-time" },
+        "end": { "type": "string", "format": "date-time" },
+        "event_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": ["id", "rule_id", "title", "severity", "description", "actor_ids", "event_ids", "recommendation"],
+      "properties": {
+        "id": { "type": "string" },
+        "rule_id": { "type": "string" },
+        "title": { "type": "string" },
+        "severity": { "enum": ["critical", "high", "medium", "low"] },
+        "description": { "type": "string" },
+        "actor_ids": { "type": "array", "items": { "type": "string" } },
+        "event_ids": { "type": "array", "items": { "type": "string" } },
+        "recommendation": { "type": "string" },
+        "iam_policy_snippet": { "type": "string" }
+      }
+    }
+  }
+}

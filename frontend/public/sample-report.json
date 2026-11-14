@@ -1,0 +1,1481 @@
+{
+  "schema_version": "0.1",
+  "generated_at": "2026-11-10T15:05:00Z",
+  "source": {
+    "kind": "file",
+    "account_id": "111122223333",
+    "regions": [
+      "us-east-1"
+    ],
+    "time_range": {
+      "start": "2026-11-10T14:00:00Z",
+      "end": "2026-11-10T14:55:00Z"
+    },
+    "description": "Sample data: a made-up account, generated to show every actor type"
+  },
+  "actors": [
+    {
+      "id": "h-maya",
+      "type": "human",
+      "display_name": "Maya Chen",
+      "principal_arn": "arn:aws:iam::111122223333:user/maya.chen"
+    },
+    {
+      "id": "a-maya-claude",
+      "type": "agent_on_behalf",
+      "display_name": "Claude Code for Maya Chen",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "on_behalf_of": "h-maya",
+      "agent_client": "Claude Code"
+    },
+    {
+      "id": "h-jordan",
+      "type": "human",
+      "display_name": "Jordan Ruiz",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/jordan.ruiz"
+    },
+    {
+      "id": "a-unattributed",
+      "type": "agent",
+      "display_name": "Unattributed agent on shared-ops-role",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "agent_client": "Python agent (boto3)"
+    },
+    {
+      "id": "auto-ci",
+      "type": "automation",
+      "display_name": "GitHub Actions deploy",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/github-actions-deploy/GitHubActions"
+    },
+    {
+      "id": "u-legacy",
+      "type": "unknown",
+      "display_name": "legacy-svc",
+      "principal_arn": "arn:aws:iam::111122223333:user/legacy-svc"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "evt-0001",
+      "event_time": "2026-11-10T14:00:05Z",
+      "event_source": "signin.amazonaws.com",
+      "event_name": "ConsoleLogin",
+      "aws_region": "us-east-1",
+      "actor_id": "h-maya",
+      "principal_arn": "arn:aws:iam::111122223333:user/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "console.amazonaws.com",
+      "read_only": false,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.94,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "console.amazonaws.com",
+            "points_to": "human",
+            "weight": 0.6
+          },
+          {
+            "name": "mfa_authenticated",
+            "value": "true",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-maya-console"
+    },
+    {
+      "event_id": "evt-0002",
+      "event_time": "2026-11-10T14:01:12Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "ListBuckets",
+      "aws_region": "us-east-1",
+      "actor_id": "h-maya",
+      "principal_arn": "arn:aws:iam::111122223333:user/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "console.amazonaws.com",
+      "read_only": true,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.94,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "console.amazonaws.com",
+            "points_to": "human",
+            "weight": 0.6
+          },
+          {
+            "name": "mfa_authenticated",
+            "value": "true",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-maya-console"
+    },
+    {
+      "event_id": "evt-0003",
+      "event_time": "2026-11-10T14:02:40Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetBucketPolicy",
+      "aws_region": "us-east-1",
+      "actor_id": "h-maya",
+      "principal_arn": "arn:aws:iam::111122223333:user/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "console.amazonaws.com",
+      "read_only": true,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.94,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "console.amazonaws.com",
+            "points_to": "human",
+            "weight": 0.6
+          },
+          {
+            "name": "mfa_authenticated",
+            "value": "true",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-maya-console",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::orders-api-artifacts",
+          "type": "AWS::S3::Bucket"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0004",
+      "event_time": "2026-11-10T14:03:02Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "ListFunctions20150331",
+      "aws_region": "us-east-1",
+      "actor_id": "h-maya",
+      "principal_arn": "arn:aws:iam::111122223333:user/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "console.amazonaws.com",
+      "read_only": true,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.94,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "console.amazonaws.com",
+            "points_to": "human",
+            "weight": 0.6
+          },
+          {
+            "name": "mfa_authenticated",
+            "value": "true",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-maya-console"
+    },
+    {
+      "event_id": "evt-0005",
+      "event_time": "2026-11-10T14:09:00Z",
+      "event_source": "sts.amazonaws.com",
+      "event_name": "AssumeRole",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:iam::111122223333:role/agent-role-dev-assistant",
+          "type": "AWS::IAM::Role"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0006",
+      "event_time": "2026-11-10T14:09:08Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "ListFunctions20150331",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude"
+    },
+    {
+      "event_id": "evt-0007",
+      "event_time": "2026-11-10T14:09:15Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "GetFunction20150331v2",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:lambda:us-east-1:111122223333:function:orders-api",
+          "type": "AWS::Lambda::Function"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0008",
+      "event_time": "2026-11-10T14:09:31Z",
+      "event_source": "logs.amazonaws.com",
+      "event_name": "FilterLogEvents",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude"
+    },
+    {
+      "event_id": "evt-0009",
+      "event_time": "2026-11-10T14:10:02Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::orders-api-artifacts/config/prod.json",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0010",
+      "event_time": "2026-11-10T14:11:44Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "UpdateFunctionConfiguration20150331v2",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:lambda:us-east-1:111122223333:function:orders-api",
+          "type": "AWS::Lambda::Function"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0011",
+      "event_time": "2026-11-10T14:12:10Z",
+      "event_source": "iam.amazonaws.com",
+      "event_name": "PutRolePolicy",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:iam::111122223333:role/orders-api-exec",
+          "type": "AWS::IAM::Role"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0012",
+      "event_time": "2026-11-10T14:12:40Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "InvokeFunction",
+      "aws_region": "us-east-1",
+      "actor_id": "a-maya-claude",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/agent-role-dev-assistant/maya.chen",
+      "source_ip": "73.14.201.9",
+      "user_agent": "claude-code/2.1 aws-mcp-server/1.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent_on_behalf",
+        "confidence": 0.92,
+        "signals": [
+          {
+            "name": "called_via_aws_mcp",
+            "value": "true",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "user_agent",
+            "value": "claude-code/2.1 aws-mcp-server/1.4",
+            "points_to": "agent",
+            "weight": 0.3
+          },
+          {
+            "name": "source_identity",
+            "value": "maya.chen",
+            "points_to": "human",
+            "weight": 0.4
+          },
+          {
+            "name": "role_name",
+            "value": "agent-role-dev-assistant",
+            "points_to": "agent",
+            "weight": 0.2
+          }
+        ]
+      },
+      "session_id": "s-maya-claude",
+      "resources": [
+        {
+          "arn": "arn:aws:lambda:us-east-1:111122223333:function:orders-api",
+          "type": "AWS::Lambda::Function"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0013",
+      "event_time": "2026-11-10T14:20:00Z",
+      "event_source": "sts.amazonaws.com",
+      "event_name": "AssumeRole",
+      "aws_region": "us-east-1",
+      "actor_id": "h-jordan",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/jordan.ruiz",
+      "source_ip": "98.51.7.120",
+      "user_agent": "aws-cli/2.22.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.81,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "aws-cli/2.22.4 md/prompt#off",
+            "points_to": "human",
+            "weight": 0.5
+          },
+          {
+            "name": "session_name",
+            "value": "jordan.ruiz",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-jordan-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:iam::111122223333:role/shared-ops-role",
+          "type": "AWS::IAM::Role"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0014",
+      "event_time": "2026-11-10T14:20:30Z",
+      "event_source": "ec2.amazonaws.com",
+      "event_name": "DescribeInstances",
+      "aws_region": "us-east-1",
+      "actor_id": "h-jordan",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/jordan.ruiz",
+      "source_ip": "98.51.7.120",
+      "user_agent": "aws-cli/2.22.4",
+      "read_only": true,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.81,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "aws-cli/2.22.4 md/prompt#off",
+            "points_to": "human",
+            "weight": 0.5
+          },
+          {
+            "name": "session_name",
+            "value": "jordan.ruiz",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-jordan-ops"
+    },
+    {
+      "event_id": "evt-0015",
+      "event_time": "2026-11-10T14:22:05Z",
+      "event_source": "ec2.amazonaws.com",
+      "event_name": "StopInstances",
+      "aws_region": "us-east-1",
+      "actor_id": "h-jordan",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/jordan.ruiz",
+      "source_ip": "98.51.7.120",
+      "user_agent": "aws-cli/2.22.4",
+      "read_only": false,
+      "classification": {
+        "actor_type": "human",
+        "confidence": 0.81,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "aws-cli/2.22.4 md/prompt#off",
+            "points_to": "human",
+            "weight": 0.5
+          },
+          {
+            "name": "session_name",
+            "value": "jordan.ruiz",
+            "points_to": "human",
+            "weight": 0.3
+          }
+        ]
+      },
+      "session_id": "s-jordan-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:ec2:us-east-1:111122223333:instance/i-0a12b34c56d78e9f0",
+          "type": "AWS::EC2::Instance"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0016",
+      "event_time": "2026-11-10T14:31:00Z",
+      "event_source": "sts.amazonaws.com",
+      "event_name": "AssumeRole",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:iam::111122223333:role/shared-ops-role",
+          "type": "AWS::IAM::Role"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0017",
+      "event_time": "2026-11-10T14:31:04Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "ListObjectsV2",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports",
+          "type": "AWS::S3::Bucket"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0018",
+      "event_time": "2026-11-10T14:31:10Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-01.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0019",
+      "event_time": "2026-11-10T14:31:16Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-02.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0020",
+      "event_time": "2026-11-10T14:31:22Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-03.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0021",
+      "event_time": "2026-11-10T14:31:28Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-04.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0022",
+      "event_time": "2026-11-10T14:31:34Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "GetObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-05.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0023",
+      "event_time": "2026-11-10T14:32:02Z",
+      "event_source": "kms.amazonaws.com",
+      "event_name": "Decrypt",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops"
+    },
+    {
+      "event_id": "evt-0024",
+      "event_time": "2026-11-10T14:32:30Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "DeleteObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-01.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0025",
+      "event_time": "2026-11-10T14:32:31Z",
+      "event_source": "s3.amazonaws.com",
+      "event_name": "DeleteObject",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": false,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "resources": [
+        {
+          "arn": "arn:aws:s3:::customer-exports/2026-11/export-02.csv",
+          "type": "AWS::S3::Object"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0026",
+      "event_time": "2026-11-10T14:32:50Z",
+      "event_source": "iam.amazonaws.com",
+      "event_name": "ListAttachedRolePolicies",
+      "aws_region": "us-east-1",
+      "actor_id": "a-unattributed",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/shared-ops-role/botocore-session-1731247200",
+      "source_ip": "10.0.42.17",
+      "user_agent": "Boto3/1.40.2 langchain-aws/0.3",
+      "read_only": true,
+      "classification": {
+        "actor_type": "agent",
+        "confidence": 0.77,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "Boto3/1.40.2 langchain-aws/0.3",
+            "points_to": "agent",
+            "weight": 0.5
+          },
+          {
+            "name": "request_rate",
+            "value": "38 calls in 90s",
+            "points_to": "agent",
+            "weight": 0.2
+          },
+          {
+            "name": "source_identity",
+            "value": "(none)",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-agent-ops",
+      "error_code": "AccessDenied"
+    },
+    {
+      "event_id": "evt-0027",
+      "event_time": "2026-11-10T14:45:00Z",
+      "event_source": "sts.amazonaws.com",
+      "event_name": "AssumeRoleWithWebIdentity",
+      "aws_region": "us-east-1",
+      "actor_id": "auto-ci",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/github-actions-deploy/GitHubActions",
+      "source_ip": "140.82.112.4",
+      "user_agent": "aws-sdk-js/3.700 GitHubActions",
+      "read_only": false,
+      "classification": {
+        "actor_type": "automation",
+        "confidence": 0.98,
+        "signals": [
+          {
+            "name": "role_name",
+            "value": "github-actions-deploy",
+            "points_to": "automation",
+            "weight": 0.6
+          },
+          {
+            "name": "web_identity",
+            "value": "token.actions.githubusercontent.com",
+            "points_to": "automation",
+            "weight": 0.4
+          }
+        ]
+      },
+      "session_id": "s-ci",
+      "resources": [
+        {
+          "arn": "arn:aws:iam::111122223333:role/github-actions-deploy",
+          "type": "AWS::IAM::Role"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0028",
+      "event_time": "2026-11-10T14:45:20Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "UpdateFunctionCode20150331v2",
+      "aws_region": "us-east-1",
+      "actor_id": "auto-ci",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/github-actions-deploy/GitHubActions",
+      "source_ip": "140.82.112.4",
+      "user_agent": "aws-sdk-js/3.700 GitHubActions",
+      "read_only": false,
+      "classification": {
+        "actor_type": "automation",
+        "confidence": 0.98,
+        "signals": [
+          {
+            "name": "role_name",
+            "value": "github-actions-deploy",
+            "points_to": "automation",
+            "weight": 0.6
+          },
+          {
+            "name": "web_identity",
+            "value": "token.actions.githubusercontent.com",
+            "points_to": "automation",
+            "weight": 0.4
+          }
+        ]
+      },
+      "session_id": "s-ci",
+      "resources": [
+        {
+          "arn": "arn:aws:lambda:us-east-1:111122223333:function:orders-api",
+          "type": "AWS::Lambda::Function"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0029",
+      "event_time": "2026-11-10T14:45:41Z",
+      "event_source": "lambda.amazonaws.com",
+      "event_name": "PublishVersion20150331",
+      "aws_region": "us-east-1",
+      "actor_id": "auto-ci",
+      "principal_arn": "arn:aws:sts::111122223333:assumed-role/github-actions-deploy/GitHubActions",
+      "source_ip": "140.82.112.4",
+      "user_agent": "aws-sdk-js/3.700 GitHubActions",
+      "read_only": false,
+      "classification": {
+        "actor_type": "automation",
+        "confidence": 0.98,
+        "signals": [
+          {
+            "name": "role_name",
+            "value": "github-actions-deploy",
+            "points_to": "automation",
+            "weight": 0.6
+          },
+          {
+            "name": "web_identity",
+            "value": "token.actions.githubusercontent.com",
+            "points_to": "automation",
+            "weight": 0.4
+          }
+        ]
+      },
+      "session_id": "s-ci",
+      "resources": [
+        {
+          "arn": "arn:aws:lambda:us-east-1:111122223333:function:orders-api",
+          "type": "AWS::Lambda::Function"
+        }
+      ]
+    },
+    {
+      "event_id": "evt-0030",
+      "event_time": "2026-11-10T14:52:00Z",
+      "event_source": "sts.amazonaws.com",
+      "event_name": "GetCallerIdentity",
+      "aws_region": "us-east-1",
+      "actor_id": "u-legacy",
+      "principal_arn": "arn:aws:iam::111122223333:user/legacy-svc",
+      "source_ip": "52.4.88.203",
+      "user_agent": "python-requests/2.32",
+      "read_only": true,
+      "classification": {
+        "actor_type": "unknown",
+        "confidence": 0.31,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "python-requests/2.32",
+            "points_to": "unknown",
+            "weight": 0.2
+          },
+          {
+            "name": "access_key_age",
+            "value": "912 days",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-legacy"
+    },
+    {
+      "event_id": "evt-0031",
+      "event_time": "2026-11-10T14:52:09Z",
+      "event_source": "iam.amazonaws.com",
+      "event_name": "ListUsers",
+      "aws_region": "us-east-1",
+      "actor_id": "u-legacy",
+      "principal_arn": "arn:aws:iam::111122223333:user/legacy-svc",
+      "source_ip": "52.4.88.203",
+      "user_agent": "python-requests/2.32",
+      "read_only": true,
+      "classification": {
+        "actor_type": "unknown",
+        "confidence": 0.31,
+        "signals": [
+          {
+            "name": "user_agent",
+            "value": "python-requests/2.32",
+            "points_to": "unknown",
+            "weight": 0.2
+          },
+          {
+            "name": "access_key_age",
+            "value": "912 days",
+            "points_to": "unknown",
+            "weight": 0.1
+          }
+        ]
+      },
+      "session_id": "s-legacy"
+    }
+  ],
+  "sessions": [
+    {
+      "session_id": "s-maya-console",
+      "title": "Maya in the AWS console",
+      "actor_id": "h-maya",
+      "event_ids": [
+        "evt-0001",
+        "evt-0002",
+        "evt-0003",
+        "evt-0004"
+      ],
+      "start": "2026-11-10T14:00:05Z",
+      "end": "2026-11-10T14:03:02Z"
+    },
+    {
+      "session_id": "s-maya-claude",
+      "title": "Claude Code debugging orders-api for Maya",
+      "actor_id": "a-maya-claude",
+      "role_arn": "arn:aws:iam::111122223333:role/agent-role-dev-assistant",
+      "event_ids": [
+        "evt-0005",
+        "evt-0006",
+        "evt-0007",
+        "evt-0008",
+        "evt-0009",
+        "evt-0010",
+        "evt-0011",
+        "evt-0012"
+      ],
+      "start": "2026-11-10T14:09:00Z",
+      "end": "2026-11-10T14:12:40Z"
+    },
+    {
+      "session_id": "s-jordan-ops",
+      "title": "Jordan stops a staging instance",
+      "actor_id": "h-jordan",
+      "role_arn": "arn:aws:iam::111122223333:role/shared-ops-role",
+      "event_ids": [
+        "evt-0013",
+        "evt-0014",
+        "evt-0015"
+      ],
+      "start": "2026-11-10T14:20:00Z",
+      "end": "2026-11-10T14:22:05Z"
+    },
+    {
+      "session_id": "s-agent-ops",
+      "title": "Unattributed agent reads and deletes customer exports",
+      "actor_id": "a-unattributed",
+      "role_arn": "arn:aws:iam::111122223333:role/shared-ops-role",
+      "event_ids": [
+        "evt-0016",
+        "evt-0017",
+        "evt-0018",
+        "evt-0019",
+        "evt-0020",
+        "evt-0021",
+        "evt-0022",
+        "evt-0023",
+        "evt-0024",
+        "evt-0025",
+        "evt-0026"
+      ],
+      "start": "2026-11-10T14:31:00Z",
+      "end": "2026-11-10T14:32:50Z"
+    },
+    {
+      "session_id": "s-ci",
+      "title": "GitHub Actions deploys orders-api",
+      "actor_id": "auto-ci",
+      "role_arn": "arn:aws:iam::111122223333:role/github-actions-deploy",
+      "event_ids": [
+        "evt-0027",
+        "evt-0028",
+        "evt-0029"
+      ],
+      "start": "2026-11-10T14:45:00Z",
+      "end": "2026-11-10T14:45:41Z"
+    },
+    {
+      "session_id": "s-legacy",
+      "title": "legacy-svc checks who it is",
+      "actor_id": "u-legacy",
+      "event_ids": [
+        "evt-0030",
+        "evt-0031"
+      ],
+      "start": "2026-11-10T14:52:00Z",
+      "end": "2026-11-10T14:52:09Z"
+    }
+  ],
+  "findings": [
+    {
+      "id": "f-001",
+      "rule_id": "TA-001",
+      "title": "A person and an AI agent share shared-ops-role",
+      "severity": "critical",
+      "description": "Jordan Ruiz and an unattributed Python agent both assumed shared-ops-role within 11 minutes. CloudTrail records the same role for both, so you cannot prove which one took an action without extra signals.",
+      "actor_ids": [
+        "h-jordan",
+        "a-unattributed"
+      ],
+      "event_ids": [
+        "evt-0013",
+        "evt-0016"
+      ],
+      "recommendation": "Give the agent its own role (for example agent-role-ops) and stop it from assuming shared-ops-role. Require sourceIdentity on every AssumeRole so each session names a person.",
+      "iam_policy_snippet": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"RequireSourceIdentity\",\n      \"Effect\": \"Deny\",\n      \"Principal\": {\n        \"AWS\": \"*\"\n      },\n      \"Action\": \"sts:AssumeRole\",\n      \"Condition\": {\n        \"Null\": {\n          \"sts:SourceIdentity\": \"true\"\n        }\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "f-002",
+      "rule_id": "TA-004",
+      "title": "An agent deleted data with no person behind it",
+      "severity": "high",
+      "description": "The unattributed agent read 5 customer export files, decrypted with KMS, then deleted 2 of them. No session carries a human identity, so nobody is accountable for the deletes.",
+      "actor_ids": [
+        "a-unattributed"
+      ],
+      "event_ids": [
+        "evt-0023",
+        "evt-0024",
+        "evt-0025"
+      ],
+      "recommendation": "Block destructive S3 actions for any agent session without a sourceIdentity, and turn on S3 versioning for customer-exports so the deleted files can be restored."
+    },
+    {
+      "id": "f-003",
+      "rule_id": "TA-003",
+      "title": "An agent changed IAM permissions",
+      "severity": "high",
+      "description": "Claude Code, working for Maya Chen, called PutRolePolicy on orders-api-exec. Maya has not changed IAM in the analyzed window, so this is new behavior coming from the agent.",
+      "actor_ids": [
+        "a-maya-claude",
+        "h-maya"
+      ],
+      "event_ids": [
+        "evt-0011"
+      ],
+      "recommendation": "Deny IAM write actions for calls that come through the AWS MCP Server. Agents can propose IAM changes; a person applies them.",
+      "iam_policy_snippet": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"NoIamWritesViaAgents\",\n      \"Effect\": \"Deny\",\n      \"Action\": [\n        \"iam:Put*\",\n        \"iam:Attach*\",\n        \"iam:Create*\",\n        \"iam:Delete*\",\n        \"iam:Update*\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"Bool\": {\n          \"aws:CalledViaAWSMCP\": \"true\"\n        }\n      }\n    }\n  ]\n}"
+    },
+    {
+      "id": "f-004",
+      "rule_id": "TA-002",
+      "title": "An agent changed production config its person only reads",
+      "severity": "medium",
+      "description": "Maya Chen only read orders-api in this window. Her agent updated its configuration and then invoked it. That may be fine, but it is a step beyond what she did herself.",
+      "actor_ids": [
+        "a-maya-claude"
+      ],
+      "event_ids": [
+        "evt-0010",
+        "evt-0012"
+      ],
+      "recommendation": "Confirm Maya meant the agent to change orders-api. If agents should only read production, scope agent-role-dev-assistant to read-only Lambda actions."
+    },
+    {
+      "id": "f-005",
+      "rule_id": "TA-005",
+      "title": "legacy-svc could not be classified",
+      "severity": "low",
+      "description": "legacy-svc uses a 912-day-old access key with a generic user agent. There is not enough signal to say whether a person, a script or an agent is using it.",
+      "actor_ids": [
+        "u-legacy"
+      ],
+      "event_ids": [
+        "evt-0030",
+        "evt-0031"
+      ],
+      "recommendation": "Find the owner, rotate the key, and move the workload to a role with a descriptive name."
+    }
+  ]
+}
